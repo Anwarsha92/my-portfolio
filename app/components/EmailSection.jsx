@@ -1,17 +1,15 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import GitHubIcon from "../../public/GitHubIcon.svg";
 import LinkedInIcon from "../../public/LinkedInIcon.svg";
-import emailjs from 'emailjs-com';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const EmailSection = () => {
-
   const [formState, setFormState] = useState({
     email: "",
     subject: "",
@@ -19,30 +17,62 @@ const EmailSection = () => {
   });
 
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    emailjs.send(
-      process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID, // EmailJS service ID
-      process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID, // EmailJS template ID
-      formState,
-      process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID // EmailJS user ID
-    ).then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-      setStatus("Email sent successfully");
-      setFormState({ email: "", subject: "", message: "" });
-      toast.success("Email sent successfully!");
-    }).catch((error) => {
-      console.error('FAILED...', error);
+    setLoading(true);
+    const isEmailValid = await verifyEmail(formState.email);
+    if (!isEmailValid) {
+      setStatus("Your email address not valid");
+      toast.error("Your email address not valid.");
+      setLoading(false);
+      return;
+    }
+    try {
+      emailjs
+        .send(
+          process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID, // EmailJS service ID
+          process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID, // EmailJS template ID
+          formState,
+          process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID // EmailJS user ID
+        )
+        .then((response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setStatus("Email sent successfully");
+          setFormState({ email: "", subject: "", message: "" });
+          toast.success("Email sent successfully!");
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("FAILED...", error);
+          setStatus("Failed to send email");
+          toast.error("Failed to send email.");
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error("FAILED...", error);
       setStatus("Failed to send email");
       toast.error("Failed to send email.");
-    });
+      setLoading(false);
+    }
+  };
+
+  const verifyEmail = async (email) => {
+    try {
+      const response = await axios.get(
+        `https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${process.env.NEXT_PUBLIC_HUNTER_API_KEY}`
+      );
+      return response.data.data.status === "valid";
+    } catch (error) {
+      console.error("Email verification failed", error);
+      return false;
+    }
   };
   return (
     <section className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
@@ -57,19 +87,24 @@ const EmailSection = () => {
           hearing from you!
         </p>
         <div className="socials inline-flex items-center flex-row gap-2 bg-white rounded">
-          <Link href={"github.com"}>
+          <Link
+            href={"https://github.com/Anwarsha92"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={GitHubIcon} alt="GitHub" />
           </Link>
-          <Link href={"linkedin.com"}>
+          <Link
+            href={"https://www.linkedin.com/in/anwar-sha-970141262/"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={LinkedInIcon} alt="LinkedIn" />
           </Link>
         </div>
       </div>
       <div>
-        <form
-          className="flex flex-col "
-          onSubmit={handleSubmit}
-        >
+        <form className="flex flex-col " onSubmit={handleSubmit}>
           <div className="mb-6">
             <label htmlFor="email" className="block text-sm mb-2 font-medium">
               Your email
@@ -116,10 +151,11 @@ const EmailSection = () => {
             />
           </div>
           <button
+            disabled={loading}
             type="submit"
-            className="bg-purple-500 hover:bg-purple-600 font-medium py-2.5 px-5 rounded-lg w-full"
+            className={`${loading? "hover:bg-gray-500 bg-gray-500":"hover:bg-purple-600  bg-purple-500"}  font-medium py-2.5 px-5 rounded-lg w-full`}
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </div>
