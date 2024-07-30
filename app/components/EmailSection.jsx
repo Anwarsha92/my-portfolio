@@ -75,7 +75,7 @@ const EmailSection = () => {
     }
   };
   return (
-    <section className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
+    <section id="contact" className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
       <div>
         <h5 className="text-xl font-bold my-2">Let's Connect</h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
@@ -153,7 +153,7 @@ const EmailSection = () => {
           <button
             disabled={loading}
             type="submit"
-            className={`${loading? "hover:bg-gray-500 bg-gray-500":"hover:bg-purple-600  bg-purple-500"}  font-medium py-2.5 px-5 rounded-lg w-full`}
+            className={`${loading? "hover:bg-gray-500 bg-gray-500":"hover:bg-primary-600  bg-primary-500"}  font-medium py-2.5 px-5 rounded-lg w-full`}
           >
             {loading ? "Sending..." : "Send Message"}
           </button>

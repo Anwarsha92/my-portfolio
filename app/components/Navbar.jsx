@@ -4,19 +4,20 @@ import React, { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "./MenuOverlay";
+import { ScrollLink } from "react-scroll";
 
 const navLinks = [
   {
     title: "About",
-    path: "#about",
+    path: "about",
   },
   {
     title: "Projects",
-    path: "#projects",
+    path: "projects",
   },
   {
     title: "Contact",
-    path: "#contact",
+    path: "contact",
   },
 ];
 
@@ -39,7 +40,7 @@ const Navbar = () => {
   return (
     <nav className="fixed mx-auto border border-[#3335] top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
       <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-2">
-        <Link href={"/"} className="text-2xl md:text-5xl font-semibold">
+        <Link href={"/"} scroll={true}  className="text-2xl md:text-5xl font-semibold">
           LOGO
         </Link>
         <div className="mobile-menu block md:hidden">
