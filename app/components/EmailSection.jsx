@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GitHubIcon from "../../public/GitHubIcon.svg";
 import LinkedInIcon from "../../public/LinkedInIcon.svg";
 import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useInView } from "framer-motion";
 
 const EmailSection = () => {
   const [formState, setFormState] = useState({
@@ -18,6 +19,21 @@ const EmailSection = () => {
 
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+// Create a ref for the email input
+const emailInputRef = useRef(null);
+  
+// Create a ref for the section
+const sectionRef = useRef(null);
+
+// Check if the section is in view
+const isInView = useInView(sectionRef);
+
+  // Focus the email input when the section comes into view
+  useEffect(() => {
+    if (isInView) {
+      emailInputRef.current.focus();
+    }
+  }, [isInView]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,7 +91,7 @@ const EmailSection = () => {
     }
   };
   return (
-    <section id="contact" className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
+    <section ref={sectionRef} id="contact" className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
       <div>
         <h5 className="text-xl font-bold my-2">Let's Connect</h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
@@ -110,6 +126,7 @@ const EmailSection = () => {
               Your email
             </label>
             <input
+              ref={emailInputRef}
               name="email"
               type="email"
               id="email"

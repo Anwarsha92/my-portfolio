@@ -61,9 +61,9 @@ const AboutSection = () => {
         
     }
   return (
-    <section id="about">
-      <div className="md:grid md:grid-cols-2 gap-8 items-start py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image className="mt-16" width={500} height={500} src={"/images/about-image.jpg"} />
+    <section id="about" className="pt-10">
+      <div className="md:grid md:grid-cols-1 gap-8 items-start px-4 xl:gap-16 sm:py-16 xl:px-16">
+        {/* <Image className="mt-16" width={500} height={500} src={"/images/about-image.jpg"} /> */}
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
@@ -77,7 +77,7 @@ const AboutSection = () => {
             challenging projects and grow within a collaborative and innovative
             team.
           </p>
-          <div className="flex flex-row mt-8 justify-start">
+          <div className="flex flex-row flex-wrap mt-8 justify-start">
             <TabButton selecTab={()=>handleTabChange("skills")} active={tab==="skills"}>Skills</TabButton>
             <TabButton selecTab={()=>handleTabChange("education")} active={tab==="education"}>Education</TabButton>
             <TabButton selecTab={()=>handleTabChange("certifications")} active={tab==="certifications"}>Certifications</TabButton>
