@@ -8,16 +8,18 @@ const TAb_DATA=[
     title:"Skills",
     id:"skills",
     content:(
-      <ul className="list-disc pl-2">
-        <li>Ract,</li>
-        <li>Node.js</li>
-        <li>Flutter</li>
-        <li>MySql</li>
-        <li>MongoDb</li>
-        <li>Javascript</li>
-        <li>HTML</li>
-        <li>CSS</li>
-      </ul>
+      <div className="grid grid-cols-1 md:grid-cols-4">
+        <ul className="list-disc pl-2 grid grid-cols-2 ">
+          <li>Ract,</li>
+          <li>Node.js</li>
+          <li>Flutter</li>
+          <li>MySql</li>
+          <li>MongoDb</li>
+          <li>Javascript</li>
+          <li>HTML</li>
+          <li>CSS</li>
+        </ul>
+      </div>
     )
   },
   {
@@ -25,7 +27,7 @@ const TAb_DATA=[
     id:"education",
     content:(
       <ul className="list-disc pl-2">
-        <li>B.Tech, St.Thomas College Of Engineering and Technology, Chengannur, Kerala</li>
+        <li>B.Tech, St.Thomas College Of Engineering and Technology, Chengannur, Kerala.</li>
         
       </ul>
     )
@@ -35,7 +37,7 @@ const TAb_DATA=[
     id:"certifications",
     content:(
       <ul className="list-disc pl-2">
-        <li>MERN Stack Developer</li>
+        <li>MERN Stack Developer, National Council for Technology and Training.</li>
         
       </ul>
     )
@@ -45,7 +47,7 @@ const TAb_DATA=[
     id:"experience",
     content:(
       <ul className="list-disc pl-2">
-        <li>Software Engineer, Grand Reves Technologies</li>
+        <li>Software Engineer, Grand Reves Technologies, Kakkanadu, Kerala.</li>
       </ul>
     )
   }
