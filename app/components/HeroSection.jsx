@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion"
@@ -54,7 +53,7 @@ const HeroSection = () => {
             </button>
           </div>
         </motion.div>
-        <div className="col-span-5 place-self-center lg:place-self-end lg:mr-14 mt-4 lg:mt-0">
+        {/* <div className="col-span-5 place-self-center lg:place-self-end lg:mr-14 mt-4 lg:mt-0">
           <div className="rounded-full bg-[#181818] w-72 h-72 lg:w-96 lg:h-96 relative overflow-hidden">
             {" "}
             <Image
@@ -64,7 +63,7 @@ const HeroSection = () => {
               src="/images/hero.jpeg"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

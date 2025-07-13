@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "./MenuOverlay";
-import { Link, ScrollLink } from "react-scroll";
+import { Link} from "react-scroll";
 import Image from "next/image";
 
 const navLinks = [
@@ -44,7 +44,9 @@ const Navbar = () => {
           <Link to={"top"} smooth={true} duration={300}  className="text-2xl md:text-5xl font-semibold cursor-pointer">
             <Image width={100}
                 height={100}
-                src="/images/logo3.png"/>
+                src="/images/logo3.png"
+                alt=""
+                />
           </Link>
           <div className="mobile-menu block md:hidden">
             {!navbarOpen ? (

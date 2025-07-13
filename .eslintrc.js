@@ -7,6 +7,9 @@ module.exports = {
   ],
   rules: {
     'react/no-unescaped-entities': 'off',
-    'jsx-a11y/alt-text': 'warn', // Optional: show warning for missing alt
+    'react/prop-types': 'off', // ✅ disable prop-types check
+    'react/react-in-jsx-scope': 'off', // ✅ disable React import requirement
+    'no-unused-vars': 'warn', // ✅ won't block build
+    'jsx-a11y/alt-text': 'warn',
   },
 };

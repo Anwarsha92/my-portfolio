@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useTransition } from "react";
 import TabButton from "./TabButton";
 
@@ -10,7 +9,7 @@ const TAb_DATA=[
     content:(
       <div className="grid grid-cols-1 md:grid-cols-4">
         <ul className="list-disc pl-2 grid grid-cols-2 ">
-          <li>Ract,</li>
+          <li>React</li>
           <li>Node.js</li>
           <li>Flutter</li>
           <li>MySql</li>
@@ -48,6 +47,7 @@ const TAb_DATA=[
     content:(
       <ul className="list-disc pl-2">
         <li>Software Engineer, Grand Reves Technologies, Kakkanadu, Kerala.</li>
+        <li>MERN Stack Developer, Luminar Technolab, Kakkanadu, Kerala.</li>
       </ul>
     )
   }
