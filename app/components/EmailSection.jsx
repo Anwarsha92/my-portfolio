@@ -53,10 +53,10 @@ const isInView = useInView(sectionRef);
     try {
       emailjs
         .send(
-          process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID, // EmailJS service ID
-          process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID, // EmailJS template ID
+          process.env.EMAIL_JS_SERVICE_ID, // EmailJS service ID
+          process.env.EMAIL_JS_TEMPLATE_ID, // EmailJS template ID
           formState,
-          process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID // EmailJS user ID
+          process.env.EMAIL_JS_USER_ID // EmailJS user ID
         )
         .then((response) => {
           console.log("SUCCESS!", response.status, response.text);
@@ -82,7 +82,7 @@ const isInView = useInView(sectionRef);
   const verifyEmail = async (email) => {
     try {
       const response = await axios.get(
-        `https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${process.env.NEXT_PUBLIC_HUNTER_API_KEY}`
+        `https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${process.env.HUNTER_API_KEY}`
       );
       return response.data.data.status === "valid";
     } catch (error) {
