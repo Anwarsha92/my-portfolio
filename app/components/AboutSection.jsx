@@ -1,21 +1,24 @@
 "use client";
-
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import TabButton from "./TabButton";
 
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
-  const [isPending, startTransition] = useTransition();
-  const [isMounted, setIsMounted] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  const [rerenderKey, setRerenderKey] = useState(0);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Force hydration and re-render
+    setHydrated(true);
+
+    // Gmail WebView specific bug fix — force layout refresh
+    setTimeout(() => {
+      setRerenderKey((prev) => prev + 1);
+    }, 200); // Enough time for WebView to fully render
   }, []);
 
   const handleTabChange = (id) => {
-    startTransition(() => {
-      setTab(id);
-    });
+    setTab(id);
   };
 
   const renderContent = () => {
@@ -110,9 +113,8 @@ const AboutSection = () => {
             </TabButton>
           </div>
 
-          {/* 🛠️ Hydration Fix Here */}
-          <div className="mt-8">
-            {isMounted ? renderContent() : (
+          <div className="mt-8" key={rerenderKey}>
+            {hydrated ? renderContent() : (
               <p className="text-white text-sm">Loading tab content...</p>
             )}
           </div>
