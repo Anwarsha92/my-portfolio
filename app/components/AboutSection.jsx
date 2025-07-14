@@ -2,13 +2,13 @@
 import React, { useState, useTransition } from "react";
 import TabButton from "./TabButton";
 
-const TAb_DATA=[
+const TAb_DATA = [
   {
-    title:"Skills",
-    id:"skills",
-    content:(
+    title: "Skills",
+    id: "skills",
+    content: () => (
       <div className="grid grid-cols-1 md:grid-cols-4">
-        <ul className="list-disc pl-2 grid grid-cols-2 ">
+        <ul className="list-disc pl-2 grid grid-cols-2">
           <li>React</li>
           <li>Node.js</li>
           <li>Flutter</li>
@@ -22,36 +22,35 @@ const TAb_DATA=[
     )
   },
   {
-    title:"Education",
-    id:"education",
-    content:(
+    title: "Education",
+    id: "education",
+    content: () => (
       <ul className="list-disc pl-2">
         <li>B.Tech, St.Thomas College Of Engineering and Technology, Chengannur, Kerala.</li>
-        
       </ul>
     )
   },
   {
-    title:"Certifications",
-    id:"certifications",
-    content:(
+    title: "Certifications",
+    id: "certifications",
+    content: () => (
       <ul className="list-disc pl-2">
         <li>MERN Stack Developer, National Council for Technology and Training.</li>
-        
       </ul>
     )
   },
   {
-    title:"Experience",
-    id:"experience",
-    content:(
+    title: "Experience",
+    id: "experience",
+    content: () => (
       <ul className="list-disc pl-2">
         <li>Software Engineer, Grand Reves Technologies, Kakkanadu, Kerala.</li>
         <li>MERN Stack Developer, Luminar Technolab, Kakkanadu, Kerala.</li>
       </ul>
     )
   }
-]
+];
+
 const AboutSection = () => {
     const [tab,setTab]=useState("skills");
     const [isPending,startTransition]=useTransition(); //for low priority state updates
@@ -87,7 +86,7 @@ const AboutSection = () => {
             
           </div>
           <div className="mt-8">
-            {TAb_DATA.find((t)=>t.id===tab).content}
+            {TAb_DATA.find((t) => t.id === tab)?.content()}
           </div>
         </div>
       </div>
